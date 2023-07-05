@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "socialChance",
+    "slug": "socialChance",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#ffffff",
+      "resizeMode": "contain"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2b3f0907-9cb9-4ab8-84f1-27cea53c483c"
+      }
+    }
+  }
+}
