@@ -1,6 +1,5 @@
 {
   "expo": {
-    "scheme": "acme",
     "web": {
       "bundler": "metro"
     },
@@ -15,6 +14,10 @@
       "eas": {
         "projectId": "2b3f0907-9cb9-4ab8-84f1-27cea53c483c"
       }
-    }
+    },
+    "android": {
+      "package": "com.bartekgiepard.socialChance"
+    },
+    "scheme": "socialChance"
   }
 }

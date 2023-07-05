@@ -2,35 +2,47 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from "react-native";
 import Wrapper from "../components/Wrapper";
 import { useRouter } from "expo-router";
 import useAuth from "../hooks/useAuth";
+import {useEffect} from "react";
 
 const Login = () => {
   const image = require('../assets/logo.png');
   const router = useRouter();
 
-  const { user } = useAuth();
+  const { user, promptAsync } = useAuth();
+
+  useEffect(() => {
+    if(user) {
+      router.push("/Profile");
+    }
+  }, [user])
 
   return (
     <Wrapper>
-      <Image source={image} style={styles.logo}/>
-
-      <Text>
-        Zaloguj się { user }
-      </Text>
-
       <View style={styles.loginButtons}>
+        <Text style={styles.loginTitle}>
+          Zaloguj się
+        </Text>
+
         <TouchableOpacity style={styles.loginButton} onPress={() => {
           router.push("/Profile");
         }}>
-          Zaloguj się przez Facebook</TouchableOpacity>
+         <Text style={styles.loginButtonText}>
+           Zaloguj się przez Facebook
+         </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.loginButton} onPress={() => promptAsync()}>
+          <Text style={styles.loginButtonText}>Zaloguj się przez Google</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity style={styles.loginButton} onPress={() => {
           router.push("/Profile");
         }}>
-          Zaloguj się przez Google</TouchableOpacity>
-        <TouchableOpacity style={styles.loginButton} onPress={() => {
-          router.push("/Profile");
-        }}>
-          Zaloguj się przez Apple</TouchableOpacity>
+          <Text style={styles.loginButtonText}>Zaloguj się przez Apple</Text>
+        </TouchableOpacity>
       </View>
+
+
       <View style={styles.registerInfo}>
         <Text style={styles.registerInfoHeader}>
           Pamiętaj!
@@ -62,21 +74,38 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  loginTitle: {
+    fontSize: 36,
+    marginBottom: 30,
+    fontFamily: 'Caveat'
+  },
   registerInfo: {
-    borderRadius: 25,
-    backgroundColor: '#eee',
-    padding: 10,
+    borderRadius: 30,
+    backgroundColor: '#D0D2D8',
+    padding: 15,
   },
   registerInfoHeader: {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 10,
+    fontFamily: 'Caveat',
+    fontSize: 32,
   },
   registerInfoText: {
-
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'CalibriRegular'
   },
   loginButton: {
-    backgroundColor: '#eee',
-    marginBottom: 20,
-    padding: 10,
+    backgroundColor: '#7F7F7F',
+    marginBottom: 30,
+    padding: 15,
+    borderRadius: 10,
+    paddingLeft: 50,
+  },
+  loginButtonText: {
+    color: '#FFC400',
+    fontSize: 22,
+    fontFamily: 'CalibriRegular'
   }
 })
 

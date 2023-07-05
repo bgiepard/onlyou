@@ -1,90 +1,122 @@
-// Styl info
-// gender
-// localization
-// birth date
-// phone number
-// images
-// zainteresowania
-
-import {View, Text, TouchableOpacity, TextInput} from "react-native";
+import {View, Text, TouchableOpacity, TextInput, StyleSheet} from "react-native";
 import Wrapper from "../components/Wrapper";
 import {useEffect, useState} from "react";
 
-const Hello = () => {
+const styles = StyleSheet.create({
+  wrapper: {
+    backgroundColor: '#D0D2D8',
+    padding: 25,
+    borderRadius: 25,
+  },
+  buttonWrapper: {
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: '#7F7F7F',
+    padding: 10,
+    paddingHorizontal: 35,
+    borderRadius: 15,
+    fontSize: 20,
+    fontFamily: 'CalibriRegular'
+  },
+  buttonText: {
+    color: '#FFC400',
+    textTransform: 'uppercase'
+  },
+  headingText: {
+    fontFamily: 'Caveat',
+    fontSize: 28,
+    textAlign: 'center'
+  },
+  subHeading: {
+    fontFamily: 'Caveat',
+    fontSize: 22,
+    marginBottom: 5,
+    marginTop: 20,
+  }
+})
+
+const Hello = ({setAcceptance}) => {
   return (
-    <View>
-      <Text>
+    <View style={styles.wrapper}>
+      <Text style={styles.headingText}>
         Witamy w ONLYOU
       </Text>
 
       <View>
         <View>
-          <Text>Pokaż Siebie!</Text>
+          <Text style={styles.subHeading}>Pokaż Siebie!</Text>
           <Text>Nie udawaj kogoś kim nie jesteś. Bądź sobą. Wstaw swoje zdjęcia.</Text>
         </View>
 
         <View>
-          <Text>Bądź ostrożny!</Text>
+          <Text style={styles.subHeading}>Bądź ostrożny!</Text>
           <Text>Nikomu nie udostępniaj prywatnych danych osobowych, aby nie narażać się na oszustwa i wymuszenia.</Text>
         </View>
 
         <View>
-          <Text>Szanuj wpisy innych!</Text>
+          <Text style={styles.subHeading}>Szanuj wpisy innych!</Text>
           <Text>Każdy ma prawo wyrazić chęć spędzania czasu jak lubi.</Text>
         </View>
 
         <View>
-          <Text>Bądź Fair!</Text>
+          <Text style={styles.subHeading}>Bądź Fair!</Text>
           <Text>Zgłaszaj nam jeśli widzisz nieodpowiednie zachowanie. Jesteśmy po to by każdy użytkownik czuł się bezpiecznie.</Text>
         </View>
 
         <View>
-          <Text>Poleć Nas!</Text>
+          <Text style={styles.subHeading}>Poleć Nas!</Text>
           <Text>Jeśli spodoba Ci się nasza aplikacja opowiedz o niej innym! :)</Text>
         </View>
-        <TouchableOpacity>Zgadzam się</TouchableOpacity>
+
+        <View style={styles.buttonWrapper}>
+          <TouchableOpacity style={styles.button} onPress={setAcceptance}>
+            <Text style={styles.buttonText}>Zgadzam się</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
 }
+
 const Style = ({setAccept}) => {
   return (
-    <View>
-      STEP 1
-      <Text>Styl spotkania zależy od ubioru</Text>
+    <View style={styles.wrapper}>
+      <Text style={styles.headingText}>Styl spotkania zależy od ubioru</Text>
       <View>
-        <Text>Imprezowicz</Text>
+        <Text style={styles.subHeading}>Imprezowicz</Text>
         <Text>Doskonała okazja aby zaszaleć! Zostań gwiazdą wieczoru</Text>
       </View>
 
       <View>
-        <Text>Luzak</Text>
+        <Text style={styles.subHeading}>Luzak</Text>
         <Text>Tutaj możesz ubrać się tak jak lubisz. Poczuj się swobodnie. Wszystkie chwyty dozwolone.</Text>
       </View>
 
       <View>
-        <Text>Romantyk</Text>
+        <Text style={styles.subHeading}>Romantyk</Text>
         <Text>Lubisz wprawiać w wrażenie? Podsyć trochę atmosferę, ale zachowaj nutkę słodyczy.</Text>
       </View>
 
       <View>
-        <Text>Sportowiec</Text>
+        <Text style={styles.subHeading}>Sportowiec</Text>
         <Text>Sport to idealny moment do założenia luźnych lub obcisłych rzeczy. Strój nie może ograniczać Twojego zakresu ruchu.</Text>
       </View>
 
       <View>
-        <Text>Podróżnik</Text>
+        <Text style={styles.subHeading}>Podróżnik</Text>
         <Text>Wspólny wyjazd? Najlepszym rozwiąazniem będzie ubrać się na cebulkę. Musisz być przygotowana/y na każdą ewentualność.</Text>
       </View>
 
       <View>
-        <Text>Elegant</Text>
+        <Text style={styles.subHeading}>Elegant</Text>
         <Text>Sukienka i marynarka to idealny motyw przewodni Waszego spotkania</Text>
       </View>
 
-      <View>
-        <TouchableOpacity onPress={setAccept}>
-          <Text>Dalej</Text>
+      <View style={styles.buttonWrapper}>
+        <TouchableOpacity style={styles.button} onPress={setAccept}>
+          <Text style={styles.buttonText}>Dalej</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -96,7 +128,6 @@ const Gender = ({setGender}) => {
 
   return (
     <View>
-      Step 2
       <Text>Jestem</Text>
 
       <TouchableOpacity onPress={()=> setThisGender("m")}><Text>Kobietą</Text></TouchableOpacity>
@@ -118,7 +149,6 @@ const Localization = ({setLocation}) => {
 
   return (
     <View>
-      Step 3
       {/*<Image></Image>*/}
       <Text>
         Udostępnij lokalizację
@@ -139,7 +169,6 @@ const Localization = ({setLocation}) => {
 const Birthday = ({setBirthday}) => {
   return (
     <View>
-      Step 4
       <Text>Kiedy masz urodziny?</Text>
       <View>
         <TextInput/>
@@ -181,6 +210,7 @@ const Interests = () => {
 const Profile = () => {
   const [user, setUser] = useState({
     accept: null,
+    style: null,
     gender: null,
     localization: null,
     birthday: null,
@@ -191,34 +221,38 @@ const Profile = () => {
 
   const step = () => {
     if(!user.accept) {  return 0; }
-    if(!user.gender) {  return 1; }
-    if(!user.localization) { return 2; }
-    if(!user.birthday) { return 3; }
-    if(!user.phoneNumber) { return 4; }
-    if(!user.gallery) { return 5; }
-    if(!user.interests) { return 6; }
+    if(!user.style) {  return 1; }
+    if(!user.gender) {  return 2; }
+    if(!user.localization) { return 3; }
+    if(!user.birthday) { return 4; }
+    if(!user.phoneNumber) { return 5; }
+    if(!user.gallery) { return 6; }
+    if(!user.interests) { return 7; }
   }
 
   return (
     <Wrapper>
 
-      {step() === 0 && <Style setAccept={()=> setUser(prevState => {
+      {step() === 0 && <Hello setAcceptance={()=> setUser(prevState => {
         return {...prevState, accept: true}
       })}/>}
-      {step() === 1 && <Gender setGender={(gender)=> setUser(prevState => {
+      {step() === 1 && <Style setAccept={()=> setUser(prevState => {
+        return {...prevState, style: true}
+      })}/>}
+      {step() === 2 && <Gender setGender={(gender)=> setUser(prevState => {
         return {...prevState, gender: gender}
       })}/>}
-      {step() === 2 && <Localization setLocation={()=> setUser(prevState => {
+      {step() === 3 && <Localization setLocation={()=> setUser(prevState => {
         return {...prevState, localization: true}
       })}/>}
-      {step() === 3 && <Birthday setBirthday={()=> setUser(prevState => {
+      {step() === 4 && <Birthday setBirthday={()=> setUser(prevState => {
         return {...prevState, birthday: true}
       })}/>}
-      {step() === 4 && <PhoneNumber setPhoneNumber={()=> setUser(prevState => {
+      {step() === 5 && <PhoneNumber setPhoneNumber={()=> setUser(prevState => {
         return {...prevState, phoneNumber: true}
       })}/>}
-      {step() === 5 && <Gallery/>}
-      {step() === 6 && <Interests/>}
+      {step() === 6 && <Gallery/>}
+      {step() === 7 && <Interests/>}
     </Wrapper>
   )
 }
