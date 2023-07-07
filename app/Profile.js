@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'CalibriRegular'
   },
+  selectedButton: {
+    backgroundColor: '#b29d9d',
+  },
   buttonText: {
     color: '#FFC400',
     textTransform: 'uppercase'
@@ -34,6 +37,24 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginBottom: 5,
     marginTop: 20,
+  },
+  genderView: {
+    alignItems: 'center',
+    height: '50%',
+    justifyContent: 'space-between',
+    paddingVertical: 50,
+  },
+  inputsWrapper: {
+    flexDirection: 'row',
+    marginTop: 50,
+  },
+  input: {
+    backgroundColor: '#7F7F7F',
+    padding: 10,
+    paddingHorizontal: 35,
+    borderRadius: 15,
+    fontSize: 20,
+    fontFamily: 'CalibriRegular'
   }
 })
 
@@ -128,18 +149,24 @@ const Gender = ({setGender}) => {
 
   return (
     <View>
-      <Text>Jestem</Text>
 
-      <TouchableOpacity onPress={()=> setThisGender("m")}><Text>Kobietą</Text></TouchableOpacity>
-      <TouchableOpacity onPress={()=> setThisGender("w")}><Text>Mężczyzną</Text></TouchableOpacity>
+      <View style={styles.genderView}>
+        <Text style={styles.headingText}>Jestem</Text>
+        <TouchableOpacity style={[styles.button, gender === "m" ? styles.selectedButton : '' ]} onPress={()=> setThisGender("m")}><Text>Kobietą</Text></TouchableOpacity>
+        <TouchableOpacity style={[styles.button, gender === "w" ? styles.selectedButton : '' ]} onPress={()=> setThisGender("w")}><Text>Mężczyzną</Text></TouchableOpacity>
+      </View>
 
-      <View>
-        <Text>Pamiętaj</Text>
+
+      <View style={styles.wrapper}>
+        <Text style={styles.headingText}>Pamiętaj</Text>
         <Text>Jeśli jesteś kobietą, w opcji "spotkanie we dwoje" będziesz widzieć tylko mężczyzn.</Text>
         <Text>Jeśli jesteś mężczyzną, w opcji "spotkanie we dwoje" będziesz widzieć tylko kobiety.</Text>
-        <TouchableOpacity onPress={() => setGender(gender)}>
-          <Text>Dalej</Text>
-        </TouchableOpacity>
+
+        <View style={styles.buttonWrapper}>
+          <TouchableOpacity style={styles.button} onPress={() => setGender(gender)} disabled={gender == ""}>
+            <Text>Dalej</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -150,17 +177,21 @@ const Localization = ({setLocation}) => {
   return (
     <View>
       {/*<Image></Image>*/}
-      <Text>
+      <Text style={styles.headingText}>
         Udostępnij lokalizację
       </Text>
 
-      <View>
-        <Text>Pamiętaj</Text>
+      <View style={styles.wrapper}>
+        <Text style={styles.headingText}>Pamiętaj</Text>
         <Text>
           Aby korzystać z aplikacji, muszi zaakceptować jej udostępnianie. Bez tego aplikacja nie będzie poprawnie działać.
         </Text>
         <Text>Więcej informacji jak wykorzystujemy Twoją lokalizację znajdziesz tutaj.</Text>
-        <TouchableOpacity onPress={setLocation}>Udostępnij Lokalizację</TouchableOpacity>
+       <View style={styles.buttonWrapper}>
+         <TouchableOpacity onPress={setLocation} style={styles.button}>
+           <Text style={styles.buttonText}>Udostępnij Lokalizację</Text>
+         </TouchableOpacity>
+       </View>
       </View>
     </View>
   )
@@ -169,14 +200,18 @@ const Localization = ({setLocation}) => {
 const Birthday = ({setBirthday}) => {
   return (
     <View>
-      <Text>Kiedy masz urodziny?</Text>
-      <View>
-        <TextInput/>
-        <TextInput/>
-        <TextInput/>
+      <Text style={styles.headingText}>Kiedy masz urodziny?</Text>
+      <View style={styles.inputsWrapper}>
+        <TextInput keyboardType="numeric" style={styles.input} placeholder="Dzień"/>
+        <TextInput keyboardType="numeric" style={styles.input} placeholder="Miesiąc"/>
+        <TextInput keyboardType="numeric" style={styles.input} placeholder="Rok"/>
       </View>
 
-      <TouchableOpacity onPress={setBirthday}>Dalej</TouchableOpacity>
+      <View style={styles.buttonWrapper}>
+        <TouchableOpacity style={styles.button} onPress={setBirthday}>
+          <Text style={styles.buttonText}>Dalej</Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
   )
@@ -185,7 +220,6 @@ const Birthday = ({setBirthday}) => {
 const PhoneNumber = ({setPhoneNumber}) => {
   return (
     <View>
-      Step 4
       <Text>Twój numer telefonu</Text>
       <View>
         <TextInput/>
@@ -193,7 +227,12 @@ const PhoneNumber = ({setPhoneNumber}) => {
         <TextInput/>
       </View>
 
-      <TouchableOpacity onPress={setPhoneNumber}>Dalej</TouchableOpacity>
+      <View style={styles.buttonWrapper}>
+        <TouchableOpacity style={styles.button} onPress={setPhoneNumber}>
+          <Text style={styles.buttonText}>Dalej</Text>
+        </TouchableOpacity>
+      </View>
+
 
     </View>
   )
